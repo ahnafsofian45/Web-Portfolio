@@ -5,97 +5,576 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Organisasi & Pengalaman - Ahnaf Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-left': 'fadeInLeft 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 0 4px rgba(102, 126, 234, 0.2)' },
+                            '50%': { boxShadow: '0 0 0 8px rgba(102, 126, 234, 0.4)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-800 font-sans">
     <!-- Navbar -->
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">A.S.E.P.</h1>
-        <nav>
-            <a href="page.html" class="mx-2 hover:text-blue-500">Beranda</a>
-        </nav>
+    <header class="fixed top-0 w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold gradient-text">A.S.E.P.</h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="page.html" class="hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    Beranda
+                </a>
+                <a href="projek.html" class="hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="folder" class="w-4 h-4"></i>
+                    Projek
+                </a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect">
+            <div class="container mx-auto px-6 py-4 space-y-4">
+                <a href="page.html" class="block hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    Beranda
+                </a>
+                <a href="projek.html" class="block hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="folder" class="w-4 h-4"></i>
+                    Projek
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Section: Organisasi -->
-    <section class="container mx-auto px-4 py-16">
-        <h2 class="text-3xl font-semibold mb-8">Pengalaman Organisasi</h2>
-        <div class="space-y-4">
-        <div class="bg-white p-4 rounded shadow">
-            <h3 class="text-xl font-bold">Staff Departemen Advokesma</h3>
-            <p class="italic text-sm text-gray-600">HIMASIFO | Februari 2024 - Februari 2025</p>
-            <p>Melayani dan mengakomodasi aspirasi mahasiswa, menyampaikan informasi 
-                beasiswa, memberikan bantuan akademik maupun non-akademik, serta 
-                menjadi penghubung antara mahasiswa dan birokrasi.</p>
-            <img src="img/Advo2024.jpg" alt="Advokesma2024" class="w-full md:w-32 h-auto rounded">
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-            <h3 class="text-xl font-bold">Wakil Kepala Departemen Advokesma</h3>
-            <p class="italic text-sm text-gray-600">HIMASIFO | Februari 2025 - Sekarang</p>
-            <p>Memberikan bantuan baik akademik maupun non-akademik, seperti bantuan MBKM 
-                dan skripsi, melayani dan mengakomodasi aspirasi mahasiswa, menyampaikan 
-                informasi beasiswa, serta menjadi penghubung antara mahasiswa dan birokrasi.</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-            <h3 class="text-xl font-bold">Mentee Divisi Bisnis Plan</h3>
-            <p class="italic text-sm text-gray-600">ISCOM | Maret 2025 - Sekarang</p>
-            <p>Mengikuti program pembinaan di Divisi Business Plan ISCOM untuk 
-                mengembangkan kemampuan dalam merancang model bisnis, analisis pasar, 
-                serta menyusun proposal dan strategi bisnis yang inovatif di bawah 
-                bimbingan mentor berpengalaman.</p>
-        </div>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 text-center">
+        <div class="container mx-auto px-6">
+            <div class="animate-fade-in-up">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    <span class="gradient-text">Pengalaman &</span><br>
+                    <span class="text-gray-700">Organisasi</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Perjalanan pengembangan diri melalui berbagai kegiatan organisasi dan pengalaman kepemimpinan yang membentuk karakter dan kemampuan profesional
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full mt-8"></div>
+            </div>
         </div>
     </section>
 
-    <!-- Section: Pengalaman -->
-    <section class="container mx-auto px-4 py-16 border-t">
-        <h2 class="text-3xl font-semibold mb-8">Pengalaman Lain</h2>
-        <div class="bg-white p-4 rounded shadow flex flex-col md:flex-row gap-4">
-            <div>
-                <h3 class="text-xl font-bold">Staff Divisi Senior Pendamping - DIMENSI 2024</h3>
-                <p class="italic text-sm text-gray-600">HIMASIFO | Agustus 2024</p>
-                <p>Bertugas mendampingi dan membimbing mahasiswa baru dalam pengadera sebagai bagian 
-                    dari kegiatan pengembangan sumber daya mahasiswa di bawah naungan HIMASIFO.</p>
-                <img src="img/Dimensi.jpg" alt="DIMENSI" class="w-full md:w-32 h-auto rounded">
+    <!-- Organizational Experience Section -->
+    <section class="py-20 bg-white/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Pengalaman Organisasi</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                    <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
+                        Berkontribusi aktif dalam berbagai organisasi mahasiswa untuk mengembangkan soft skills dan memberikan dampak positif
+                    </p>
+                </div>
+
+                <!-- Timeline -->
+                <div class="relative">
+                    <div class="timeline-line ml-8"></div>
+                    
+                    <!-- Current Position -->
+                    <div class="relative ml-16 mb-12 animate-fade-in-left">
+                        <div class="timeline-item bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover">
+                            <div class="p-8">
+                                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                                    <div>
+                                        <div class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full mb-3 animate-pulse-glow">
+                                            <i data-lucide="clock" class="w-4 h-4 mr-1"></i>
+                                            Aktif Sekarang
+                                        </div>
+                                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Wakil Kepala Departemen Advokesma</h3>
+                                        <div class="flex items-center text-indigo-600 font-semibold mb-2">
+                                            <i data-lucide="building" class="w-5 h-5 mr-2"></i>
+                                            HIMASIFO
+                                        </div>
+                                        <div class="flex items-center text-gray-500 text-sm">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            Februari 2025 - Sekarang
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    Memberikan bantuan baik akademik maupun non-akademik, seperti bantuan MBKM dan skripsi, melayani dan mengakomodasi aspirasi mahasiswa, menyampaikan informasi beasiswa, serta menjadi penghubung antara mahasiswa dan birokrasi.
+                                </p>
+                                
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">Leadership</span>
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">Student Advocacy</span>
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Academic Support</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ISCOM Experience -->
+                    <div class="relative ml-16 mb-12 animate-fade-in-left">
+                        <div class="timeline-item bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover">
+                            <div class="p-8">
+                                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                                    <div>
+                                        <div class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full mb-3">
+                                            <i data-lucide="trending-up" class="w-4 h-4 mr-1"></i>
+                                            Program Pengembangan
+                                        </div>
+                                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Mentee Divisi Bisnis Plan</h3>
+                                        <div class="flex items-center text-indigo-600 font-semibold mb-2">
+                                            <i data-lucide="building" class="w-5 h-5 mr-2"></i>
+                                            ISCOM
+                                        </div>
+                                        <div class="flex items-center text-gray-500 text-sm">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            Maret 2025 - Sekarang
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    Mengikuti program pembinaan di Divisi Business Plan ISCOM untuk mengembangkan kemampuan dalam merancang model bisnis, analisis pasar, serta menyusun proposal dan strategi bisnis yang inovatif di bawah bimbingan mentor berpengalaman.
+                                </p>
+                                
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Business Planning</span>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full">Market Analysis</span>
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">Strategic Thinking</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Previous Staff Position -->
+                    <div class="relative ml-16 mb-12 animate-fade-in-left">
+                        <div class="timeline-item bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover">
+                            <div class="p-8">
+                                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                                    <div class="flex-1">
+                                        <div class="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full mb-3">
+                                            <i data-lucide="check-circle" class="w-4 h-4 mr-1"></i>
+                                            Selesai
+                                        </div>
+                                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Staff Departemen Advokesma</h3>
+                                        <div class="flex items-center text-indigo-600 font-semibold mb-2">
+                                            <i data-lucide="building" class="w-5 h-5 mr-2"></i>
+                                            HIMASIFO
+                                        </div>
+                                        <div class="flex items-center text-gray-500 text-sm">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            Februari 2024 - Februari 2025
+                                        </div>
+                                    </div>
+                                    <div class="lg:ml-6 mt-4 lg:mt-0">
+                                        <img src="img/Advo2024.jpg" alt="Advokesma 2024" class="w-full lg:w-48 h-32 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                                    </div>
+                                </div>
+                                
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    Melayani dan mengakomodasi aspirasi mahasiswa, menyampaikan informasi beasiswa, memberikan bantuan akademik maupun non-akademik, serta menjadi penghubung antara mahasiswa dan birokrasi.
+                                </p>
+                                
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Student Services</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Communication</span>
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">Problem Solving</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="bg-white p-4 rounded shadow flex flex-col md:flex-row gap-4">
-            <div>
-                <h3 class="text-xl font-bold">Staff Divisi Hubungan Masyarakat - Donor Darah HIMASIFO 2024</h3>
-                <p class="italic text-sm text-gray-600">HIMASIFO | Juni 2024</p>
-                <p>Bertugas dalam menyebarkan informasi, membangun komunikasi, serta menjalin relasi dengan pihak internal 
-                    maupun eksternal untuk mendukung kelancaran kegiatan Donor Darah HIMASIFO 2024. Berperan dalam meningkatkan 
-                    partisipasi peserta dan menjaga citra positif acara melalui strategi komunikasi yang efektif.</p>
-                <img src="img/Donor Darah.png" alt="Donor Darah" class="w-full md:w-32 h-auto rounded">
+    </section>
+
+    <!-- Other Experiences Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Pengalaman Lainnya</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                    <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
+                        Pengalaman dalam berbagai kegiatan dan event yang memperkaya kemampuan organisasi dan kepemimpinan
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- DIMENSI 2024 -->
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-scale-in card-hover">
+                        <div class="p-8">
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-6">
+                                <img src="img/Dimensi.jpg" alt="DIMENSI 2024" class="w-full sm:w-32 h-32 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                                <div class="flex-1">
+                                    <div class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full mb-3">
+                                        <i data-lucide="users" class="w-4 h-4 mr-1"></i>
+                                        Mentoring
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-2">Staff Divisi Senior Pendamping - DIMENSI 2024</h3>
+                                    <div class="flex items-center text-indigo-600 font-semibold mb-2">
+                                        <i data-lucide="building" class="w-4 h-4 mr-2"></i>
+                                        HIMASIFO
+                                    </div>
+                                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                        Agustus 2024
+                                    </div>
+                                    <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                        Bertugas mendampingi dan membimbing mahasiswa baru dalam kegiatan pengembangan sumber daya mahasiswa di bawah naungan HIMASIFO.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Mentoring</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Leadership</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Donor Darah -->
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-scale-in card-hover">
+                        <div class="p-8">
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-6">
+                                <img src="img/Donor Darah.png" alt="Donor Darah 2024" class="w-full sm:w-32 h-32 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                                <div class="flex-1">
+                                    <div class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full mb-3">
+                                        <i data-lucide="heart" class="w-4 h-4 mr-1"></i>
+                                        Social Impact
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-2">Staff Divisi Humas - Donor Darah HIMASIFO 2024</h3>
+                                    <div class="flex items-center text-indigo-600 font-semibold mb-2">
+                                        <i data-lucide="building" class="w-4 h-4 mr-2"></i>
+                                        HIMASIFO
+                                    </div>
+                                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                        Juni 2024
+                                    </div>
+                                    <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                        Mengelola komunikasi dan relasi untuk mendukung kegiatan donor darah, meningkatkan partisipasi peserta melalui strategi komunikasi yang efektif.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Public Relations</span>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Communication</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MABA CUP X COD -->
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-scale-in card-hover">
+                        <div class="p-8">
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-6">
+                                <img src="img/COD.jpg" alt="MABA CUP X COD 2024" class="w-full sm:w-32 h-32 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                                <div class="flex-1">
+                                    <div class="inline-flex items-center px-3 py-1 bg-indigo-100 text-indigo-800 text-sm font-medium rounded-full mb-3">
+                                        <i data-lucide="shield" class="w-4 h-4 mr-1"></i>
+                                        Security & Permits
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-2">Staff Divisi Keamanan dan Perizinan MABA CUP X COD 2024</h3>
+                                    <div class="flex items-center text-indigo-600 font-semibold mb-2">
+                                        <i data-lucide="building" class="w-4 h-4 mr-2"></i>
+                                        BEM Fakultas Ilmu Komputer
+                                    </div>
+                                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                        Januari 2024 - Februari 2024
+                                    </div>
+                                    <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                        Mengurus perizinan dan menjaga ketertiban dalam ajang perlombaan mahasiswa baru dan malam keakraban tingkat fakultas.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Security</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Administration</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COSMIC -->
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-scale-in card-hover">
+                        <div class="p-8">
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-6">
+                                <img src="img/COSMIC.png" alt="COSMIC 2023" class="w-full sm:w-32 h-32 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                                <div class="flex-1">
+                                    <div class="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full mb-3">
+                                        <i data-lucide="star" class="w-4 h-4 mr-1"></i>
+                                        Event Management
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-2">Staff Divisi Humas - COSMIC</h3>
+                                    <div class="flex items-center text-indigo-600 font-semibold mb-2">
+                                        <i data-lucide="building" class="w-4 h-4 mr-2"></i>
+                                        HIMASIFO
+                                    </div>
+                                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                        Oktober 2023
+                                    </div>
+                                    <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                        Mengelola komunikasi dan hubungan untuk mendukung kelancaran acara malam keakraban prodi, menjaga pencitraan positif acara.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Event Management</span>
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Public Relations</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="bg-white p-4 rounded shadow flex flex-col md:flex-row gap-4">
-            <div>
-                <h3 class="text-xl font-bold">Staff Divisi Keamanan dan Perizinan MABA CUP X COD 2024</h3>
-                <p class="italic text-sm text-gray-600">BEM Fakultas Ilmu Komputer | Januari 2024 - Februari 2024</p>
-                <p>Bertanggung jawab dalam menjaga ketertiban dan mengurus perizinan kegiatan MABA CUP (ajang perlombaan bagi mahasiswa 
-                    baru se-Fakultas Ilmu Komputer) dan COD (malam keakraban tingkat fakultas). Berperan dalam memastikan seluruh 
-                    rangkaian acara berjalan dengan aman, tertib, serta sesuai dengan prosedur perizinan dan regulasi yang ditetapkan oleh fakultas.</p>
-                <img src="img/COD.jpg" alt="MABA CUP X COD" class="w-full md:w-32 h-auto rounded">
+    </section>
+
+    <!-- Skills Gained Section -->
+    <section class="py-20 bg-white/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Skills yang Dikembangkan</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full mb-12"></div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover">
+                        <div class="p-4 bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="users" class="w-8 h-8 text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Leadership & Teamwork</h3>
+                        <p class="text-gray-600">Kemampuan memimpin tim dan berkolaborasi secara efektif dalam berbagai situasi</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover">
+                        <div class="p-4 bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="message-circle" class="w-8 h-8 text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Communication</h3>
+                        <p class="text-gray-600">Komunikasi yang efektif dengan berbagai stakeholder internal dan eksternal</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover">
+                        <div class="p-4 bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="target" class="w-8 h-8 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Problem Solving</h3>
+                        <p class="text-gray-600">Kemampuan mengidentifikasi masalah dan mencari solusi inovatif yang efektif</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover">
+                        <div class="p-4 bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="calendar" class="w-8 h-8 text-red-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Time Management</h3>
+                        <p class="text-gray-600">Manajemen waktu yang efisien dalam mengelola multiple projects dan deadline</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover">
+                        <div class="p-4 bg-yellow-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="lightbulb" class="w-8 h-8 text-yellow-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Strategic Planning</h3>
+                        <p class="text-gray-600">Perencanaan strategis untuk mencapai tujuan organisasi dan program kerja</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover">
+                        <div class="p-4 bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="heart-handshake" class="w-8 h-8 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Public Relations</h3>
+                        <p class="text-gray-600">Membangun dan menjaga hubungan baik dengan berbagai pihak stakeholder</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="bg-white p-4 rounded shadow flex flex-col md:flex-row gap-4">
-            <div>
-                <h3 class="text-xl font-bold">Staff Divisi Hubungan Masyarakat - COSMIC</h3>
-                <p class="italic text-sm text-gray-600">HIMASIFO | Oktober 2023</p>
-                <p>Bertanggung jawab dalam membangun komunikasi eksternal dan internal untuk mendukung 
-                    kelancaran acara malam keakraban prodi, yang diselenggarakan di bawah naungan HIMASIFO. 
-                    Berperan dalam menyampaikan informasi, menjaga hubungan antar peserta dan panitia, 
-                    serta mendukung pencitraan positif acara melalui berbagai media komunikasi.</p>
-                <img src="img/COSMIC.png" alt="COSMIC" class="w-full md:w-32 h-auto rounded">
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-12 text-white">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Siap Berkolaborasi?</h2>
+                    <p class="text-xl mb-8 opacity-90">
+                        Pengalaman organisasi telah membekali saya dengan soft skills yang kuat. Mari berdiskusi tentang bagaimana saya dapat berkontribusi untuk tim Anda.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="page.html#contact" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            Hubungi Saya
+                        </a>
+                        <a href="projek.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors duration-300 flex items-center justify-center gap-2">
+                            <i data-lucide="folder" class="w-5 h-5"></i>
+                            Lihat Projek
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-4">
-        <p>&copy; 2025 Ahnaf Putra. All rights reserved.</p>
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-2xl font-bold mb-4 gradient-text">A.S.E.P.</h3>
+                <p class="text-gray-400 mb-6">
+                    Ahmad Sodik Ahnaf Eka Putra - Mahasiswa Sistem Informasi yang passionate dalam teknologi dan pengembangan diri
+                </p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </a>
+                </div>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2025 Ahmad Sodik Ahnaf Eka Putra. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-scale-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>

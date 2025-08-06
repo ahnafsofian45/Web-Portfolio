@@ -5,115 +5,687 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Projek - Ahnaf Putra</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-left': 'fadeInLeft 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'bounce-subtle': 'bounceSubtle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        bounceSubtle: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .tech-tag {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .tech-tag:hover::before {
+            left: 100%;
+        }
+
+        .floating-icon {
+            animation: bounceSubtle 2s ease-in-out infinite;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">A.S.E.P.</h1>
-        <nav>
-            <a href="page.html" class="mx-2 hover:text-blue-500">Beranda</a>
-        </nav>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-800 font-sans">
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold gradient-text">A.S.E.P.</h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="page.html" class="hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    Beranda
+                </a>
+                <a href="organisasi.html" class="hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    Organisasi
+                </a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect">
+            <div class="container mx-auto px-6 py-4 space-y-4">
+                <a href="page.html" class="block hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    Beranda
+                </a>
+                <a href="organisasi.html" class="block hover:text-indigo-600 transition-colors duration-300 flex items-center gap-2">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    Organisasi
+                </a>
+            </div>
         </div>
     </header>
 
-    <section class="container mx-auto px-4 py-16">
-        <h2 class="text-3xl font-semibold mb-8">Projek Saya</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">Spotly SDD</h3>
-                <p class="italic text-sm text-gray-600">System Analyst | Aug 2024 – Jan 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Menyusun dokumentasi spesifikasi perangkat lunak untuk aplikasi desktop Spotly.</li>
-                    <li>Membuat dokumentasi lengkap termasuk 4 Data Flow Diagram (DFD), dan lebih dari 6 diagram UML (Use Case, Class, Activity).</li>
-                    <li>Memastikan komunikasi yang jelas untuk pengembangan dan peninjauan oleh stakeholder.</li>
-                </ul>
-            </div>
-            <!-- MieMe Desktop -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">MieMe Desktop</h3>
-                <p class="italic text-sm text-gray-600">Desktop App Developer | Aug 2024 – Jan 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Mengembangkan aplikasi desktop untuk manajemen pesanan kewirausahaan menggunakan VB.NET dan MySQL.</li>
-                    <li>Membangun 7 fitur utama, termasuk modul pelaporan dan pembuatan faktur.</li>
-                    <li>Mengoptimalkan query database dan mengurangi waktu pengambilan data sebesar 40%.</li>
-                    <li>Bertanggung jawab atas logika backend dan desain database, serta menerapkan puluhan aturan bisnis kompleks.</li>
-                </ul>
-            </div>
-
-            <!-- Mentaly HCI -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">Mentaly HCI</h3>
-                <p class="italic text-sm text-gray-600">UI/UX Designer | Aug 2024 – Jan 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Mendesain UI/UX aplikasi kesehatan mental dengan pendekatan Design Thinking.</li>
-                    <li>Melakukan 2 wawancara pengguna (konselor dan siswa), dan menyusun hasilnya menjadi 2 persona rinci.</li>
-                    <li>Membuat lebih dari 1 wireframe dan 1 prototipe fidelity tinggi di Figma.</li>
-                    <li>Desain berhasil mengurangi beban kognitif pengguna sebesar 30% dalam pengujian.</li>
-                </ul>
-            </div>
-
-            <!-- IT Governance – CV. Puncak Abadi -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">IT Governance – CV. Puncak Abadi</h3>
-                <p class="italic text-sm text-gray-600">ISMS Consultant | Aug 2024 – Jan 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Merancang sistem manajemen keamanan informasi (ISMS) berdasarkan ISO 27001:2022.</li>
-                    <li>Menyusun rencana lengkap menggunakan Indeks KAMI.</li>
-                    <li>Mengevaluasi lebih dari 5 kontrol keamanan dan memberikan strategi mitigasi risiko untuk operasional perusahaan.</li>
-                </ul>
-            </div>
-
-            <!-- MieMe Web -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">MieMe Web</h3>
-                <p class="italic text-sm text-gray-600">Website Developer | Feb 2025 – Jun 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Mengembangkan aplikasi web manajemen pesanan untuk bisnis kewirausahaan.</li>
-                    <li>Menggunakan Laravel 11, PHP, Tailwind, dan MySQL; terintegrasi dengan GitHub untuk kontrol versi.</li>
-                    <li>Merancang dan mengimplementasikan 5+ modul untuk berbagai peran pengguna (admin, staf, pelanggan, pemilik).</li>
-                    <li>Memimpin desain skema database dan berkontribusi pada 40% logika backend dan antarmuka.</li>
-                </ul>
-            </div>
-
-            <!-- Mentaly Mobile -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">Mentaly Mobile</h3>
-                <p class="italic text-sm text-gray-600">Mobile App Developer | Feb 2025 – Jun 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Mengembangkan aplikasi mobile dukungan kesehatan mental berbasis AI Chatbot.</li>
-                    <li>Dibuat menggunakan Flutter dan SQLite di VS Code dan Android Studio.</li>
-                    <li>Membangun 6 modul utama termasuk halaman AI Chatbot dan manajemen profil.</li>
-                    <li>Berkontribusi sekitar 25% dalam pengembangan frontend dan backend.</li>
-                    <li>Meningkatkan performa aplikasi dengan mengurangi waktu muat hingga 25%.</li>
-                </ul>
-            </div>
-
-            <!-- MieMe Web Project Management Documents -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">MieMe Web Project Management Documents</h3>
-                <p class="italic text-sm text-gray-600">Project Manager | Feb 2025 – Jun 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Menyusun dokumentasi manajemen proyek berbasis PMBOK untuk proyek website MieMe.</li>
-                    <li>Mengembangkan lebih dari 10 dokumen proyek (ruang lingkup, WBS, jadwal, matriks risiko, dll.).</li>
-                    <li>Memastikan kesesuaian 100% terhadap standar PMBOK dalam seluruh proses pengelolaan proyek.</li>
-                </ul>
-            </div>
-
-            <!-- Mentaly Mobile App Business Proposal -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h3 class="text-xl font-bold">Mentaly Mobile App Business Proposal</h3>
-                <p class="italic text-sm text-gray-600">Business Planner | Feb 2025 – Jun 2025</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                    <li>Menyusun proposal bisnis untuk aplikasi mental health "Mentaly" yang ditujukan bagi remaja.</li>
-                    <li>Memuat analisis pasar, fitur utama, dan strategi monetisasi.</li>
-                    <li>Diproyeksikan dapat menjangkau lebih dari 5.000 pengguna pada tahun pertama.</li>
-                </ul>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 text-center">
+        <div class="container mx-auto px-6">
+            <div class="animate-fade-in-up">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    <span class="gradient-text">Portfolio</span><br>
+                    <span class="text-gray-700">Projek</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Kumpulan projek yang telah saya kerjakan, menampilkan kemampuan teknis dalam pengembangan aplikasi, analisis sistem, dan manajemen proyek
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full mt-8"></div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-800 text-white text-center py-4">
-        <p>&copy; 2025 Ahnaf Putra. All rights reserved.</p>
+    <!-- Projects Statistics -->
+    <section class="py-16 bg-white/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center animate-scale-in">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">8</div>
+                        <div class="text-gray-600">Total Projek</div>
+                    </div>
+                    <div class="text-center animate-scale-in" style="animation-delay: 0.1s">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">10+</div>
+                        <div class="text-gray-600">Teknologi</div>
+                    </div>
+                    <div class="text-center animate-scale-in" style="animation-delay: 0.2s">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">2+</div>
+                        <div class="text-gray-600">Tahun Pengalaman</div>
+                    </div>
+                    <div class="text-center animate-scale-in" style="animation-delay: 0.3s">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">500+</div>
+                        <div class="text-gray-600">Jam Coding</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Projects Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Semua Projek</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                    <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
+                        Berikut adalah daftar lengkap projek yang telah saya kerjakan dengan berbagai teknologi dan metodologi
+                    </p>
+                </div>
+
+                <!-- Project Grid -->
+                <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    <!-- 1. Spotly SDD -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg text-white floating-icon">
+                                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Spotly SDD</h3>
+                            <p class="text-sm text-gray-500 mb-3">System Analyst | Aug 2024 – Jan 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Menyusun dokumentasi spesifikasi perangkat lunak untuk aplikasi desktop Spotly dengan 4 DFD dan 6+ diagram UML.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">System Analysis</span>
+                                <span class="tech-tag px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">UML</span>
+                                <span class="tech-tag px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">DFD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. MieMe Desktop -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up" style="animation-delay: 0.1s">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white floating-icon" style="animation-delay: 0.2s">
+                                    <i data-lucide="monitor" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">MieMe Desktop</h3>
+                            <p class="text-sm text-gray-500 mb-3">Desktop App Developer | Aug 2024 – Jan 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Aplikasi desktop manajemen pesanan dengan 7 fitur utama, mengurangi waktu pengambilan data sebesar 40%.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">VB.NET</span>
+                                <span class="tech-tag px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">MySQL</span>
+                                <span class="tech-tag px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Database Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Mentaly HCI -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up" style="animation-delay: 0.2s">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg text-white floating-icon" style="animation-delay: 0.4s">
+                                    <i data-lucide="palette" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Mentaly HCI</h3>
+                            <p class="text-sm text-gray-500 mb-3">UI/UX Designer | Aug 2024 – Jan 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Desain UI/UX aplikasi kesehatan mental dengan Design Thinking, mengurangi beban kognitif sebesar 30%.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">Figma</span>
+                                <span class="tech-tag px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Design Thinking</span>
+                                <span class="tech-tag px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">User Research</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. IT Governance -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up" style="animation-delay: 0.3s">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-red-500 to-orange-600 rounded-lg text-white floating-icon" style="animation-delay: 0.6s">
+                                    <i data-lucide="shield" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">IT Governance – CV. Puncak Abadi</h3>
+                            <p class="text-sm text-gray-500 mb-3">ISMS Consultant | Aug 2024 – Jan 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Merancang sistem manajemen keamanan informasi berdasarkan ISO 27001:2022 dengan evaluasi 5+ kontrol keamanan.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">ISO 27001</span>
+                                <span class="tech-tag px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">ISMS</span>
+                                <span class="tech-tag px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Risk Assessment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. MieMe Web -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up" style="animation-delay: 0.4s">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-lg text-white floating-icon" style="animation-delay: 0.8s">
+                                    <i data-lucide="globe" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">MieMe Web</h3>
+                            <p class="text-sm text-gray-500 mb-3">Website Developer | Feb 2025 – Jun 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Aplikasi web manajemen pesanan dengan 5+ modul untuk berbagai peran pengguna, terintegrasi dengan GitHub.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Laravel 11</span>
+                                <span class="tech-tag px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">PHP</span>
+                                <span class="tech-tag px-2 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Mentaly Mobile -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up" style="animation-delay: 0.5s">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg text-white floating-icon" style="animation-delay: 1s">
+                                    <i data-lucide="smartphone" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Mentaly Mobile</h3>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App Developer | Feb 2025 – Jun 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Aplikasi mobile kesehatan mental berbasis AI Chatbot dengan 6 modul utama, meningkatkan performa hingga 25%.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Flutter</span>
+                                <span class="tech-tag px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">SQLite</span>
+                                <span class="tech-tag px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">AI Integration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. MieMe Web Project Management Documents -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up" style="animation-delay: 0.6s">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg text-white floating-icon" style="animation-delay: 1.2s">
+                                    <i data-lucide="clipboard-list" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">MieMe Web PM Documents</h3>
+                            <p class="text-sm text-gray-500 mb-3">Project Manager | Feb 2025 – Jun 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Dokumentasi manajemen proyek berbasis PMBOK dengan 10+ dokumen proyek standar industri untuk website MieMe.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">PMBOK</span>
+                                <span class="tech-tag px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">WBS</span>
+                                <span class="tech-tag px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Risk Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Mentaly Mobile App Business Proposal -->
+                    <div class="project-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] card-hover animate-fade-in-up" style="animation-delay: 0.7s">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-lg text-white floating-icon" style="animation-delay: 1.4s">
+                                    <i data-lucide="trending-up" class="w-6 h-6"></i>
+                                </div>
+                                <div class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">
+                                    Completed
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Mentaly Business Proposal</h3>
+                            <p class="text-sm text-gray-500 mb-3">Business Planner | Feb 2025 – Jun 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Proposal bisnis untuk aplikasi mental health "Mentaly" dengan proyeksi 5.000+ pengguna pada tahun pertama.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Market Analysis</span>
+                                <span class="tech-tag px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Business Model</span>
+                                <span class="tech-tag px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Strategy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Categories -->
+    <section class="py-20 bg-white/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Kategori Projek</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center group">
+                        <div class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
+                            <div class="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:animate-bounce">
+                                <i data-lucide="monitor" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Development</h3>
+                            <p class="text-gray-600 mb-4">Desktop, Web, dan Mobile Applications</p>
+                            <div class="text-2xl font-bold gradient-text">4 Projek</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center group">
+                        <div class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
+                            <div class="p-4 bg-gradient-to-r from-green-500 to-blue-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:animate-bounce">
+                                <i data-lucide="file-text" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Documentation</h3>
+                            <p class="text-gray-600 mb-4">System Analysis dan Project Management</p>
+                            <div class="text-2xl font-bold gradient-text">2 Projek</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center group">
+                        <div class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
+                            <div class="p-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:animate-bounce">
+                                <i data-lucide="palette" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Design & Business</h3>
+                            <p class="text-gray-600 mb-4">UI/UX Design dan Business Planning</p>
+                            <div class="text-2xl font-bold gradient-text">2 Projek</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Teknologi & Tools</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                    <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
+                        Teknologi dan tools yang saya kuasai dalam pengembangan aplikasi dan sistem
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Programming Languages -->
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 card-hover">
+                        <div class="p-4 bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="code-2" class="w-8 h-8 text-blue-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-4">Programming</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center justify-between">
+                                <span>PHP</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full w-4/5"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>VB.NET</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full w-3/4"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Dart</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-cyan-600 h-2 rounded-full w-3/5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frameworks -->
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 card-hover">
+                        <div class="p-4 bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="layers" class="w-8 h-8 text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-4">Frameworks</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center justify-between">
+                                <span>Laravel</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-red-600 h-2 rounded-full w-4/5"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Flutter</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full w-3/5"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Tailwind</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-teal-600 h-2 rounded-full w-4/5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Databases -->
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 card-hover">
+                        <div class="p-4 bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="database" class="w-8 h-8 text-orange-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-4">Databases</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center justify-between">
+                                <span>MySQL</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full w-4/5"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>SQLite</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-600 h-2 rounded-full w-3/4"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>SQL Server</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-red-600 h-2 rounded-full w-2/3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 card-hover">
+                        <div class="p-4 bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="wrench" class="w-8 h-8 text-purple-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-4">Tools</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center justify-between">
+                                <span>Figma</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-pink-600 h-2 rounded-full w-4/5"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Git</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-orange-600 h-2 rounded-full w-3/4"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>VS Code</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full w-5/6"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-12 text-white">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Tertarik dengan Projek Saya?</h2>
+                    <p class="text-xl mb-8 opacity-90">
+                        Saya selalu antusias untuk berdiskusi tentang teknologi, berbagi pengalaman, atau berkolaborasi dalam projek menarik.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="page.html#contact" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            Mari Berdiskusi
+                        </a>
+                        <a href="https://github.com" target="_blank" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors duration-300 flex items-center justify-center gap-2">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                            Lihat GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-2xl font-bold mb-4 gradient-text">A.S.E.P.</h3>
+                <p class="text-gray-400 mb-6">
+                    Ahmad Sodik Ahnaf Eka Putra - Passionate Full Stack Developer & System Analyst
+                </p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </a>
+                </div>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2025 Ahmad Sodik Ahnaf Eka Putra. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-scale-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                observer.observe(el);
+            });
+
+            // Add stagger delay to grid items
+            document.querySelectorAll('.animate-scale-in').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
 </body>
 </html>

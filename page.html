@@ -3,61 +3,507 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Portofolio Ahnaf Putra</title>
+    <title>Portofolio Ahnaf Putra - System Analyst & Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-down': 'fadeInDown 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .skill-bar {
+            transition: width 2s ease-in-out;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-800 font-sans">
     <!-- Navbar -->
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">A.S.E.P.</h1>
-        <nav>
-            <a href="page.html" class="mx-2 hover:text-blue-500">Beranda</a>
-            <a href="#about" class="mx-2 hover:text-blue-500">Tentang</a>
-            <a href="#contact" class="mx-2 hover:text-blue-500">Kontak</a>
-        </nav>
+    <header class="fixed top-0 w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold gradient-text">A.S.E.P.</h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-indigo-600 transition-colors duration-300">Beranda</a>
+                <a href="#about" class="hover:text-indigo-600 transition-colors duration-300">Tentang</a>
+                <a href="#skills" class="hover:text-indigo-600 transition-colors duration-300">Keahlian</a>
+                <a href="#contact" class="hover:text-indigo-600 transition-colors duration-300">Kontak</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect">
+            <div class="container mx-auto px-6 py-4 space-y-4">
+                <a href="#home" class="block hover:text-indigo-600 transition-colors duration-300">Beranda</a>
+                <a href="#about" class="block hover:text-indigo-600 transition-colors duration-300">Tentang</a>
+                <a href="#skills" class="block hover:text-indigo-600 transition-colors duration-300">Keahlian</a>
+                <a href="#contact" class="block hover:text-indigo-600 transition-colors duration-300">Kontak</a>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-blue-600 text-white text-center py-20">
-        <h2 class="text-4xl font-bold mb-4">Halo, Saya Ahnaf Sofi'an Eka Putra</h2>
-        <p class="text-lg">System Analyst | Web Developer | UI/UX Enthusiast</p>
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="animate-fade-in-down">
+                <!-- Profile Photo Placeholder -->
+                <div class="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 p-1 animate-float">
+                    <div class="w-full h-full rounded-full bg-gray-200 flex items-center justify-center">
+                        <img src="img/ASEP.jpg" alt="Ahnaf Putra" class="w-full h-full rounded-full object-cover">
+                    </div>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    <span class="gradient-text">Ahnaf Sofi'an</span><br>
+                    <span class="text-gray-700">Eka Putra</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                    System Analyst • Web Developer • UI/UX Enthusiast
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                    <a href="projek.html" class="group bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="folder" class="w-5 h-5"></i>
+                            Lihat Projek
+                        </span>
+                    </a>
+                    <a href="organisasi.html" class="group border-2 border-gray-700 hover:bg-gray-700 hover:text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="users" class="w-5 h-5"></i>
+                            Pengalaman & Organisasi
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="flex justify-center space-x-6">
+                    <a href="mailto:ahnafputra@email.com" class="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300">
+                        <i data-lucide="mail" class="w-6 h-6 text-indigo-600"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/ahnaf" class="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300">
+                        <i data-lucide="linkedin" class="w-6 h-6 text-indigo-600"></i>
+                    </a>
+                    <a href="https://github.com/ahnafputra" class="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300">
+                        <i data-lucide="github" class="w-6 h-6 text-indigo-600"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="container mx-auto px-4 py-16">
-        <h2 class="text-3xl font-semibold mb-4">Tentang Saya</h2>
-        <p class="mb-6">
-        Mahasiswa Sistem Informasi dengan pengalaman dalam 
-        pengembangan web, desain UI/UX, dan manajemen proyek. Menguasai 
-        Java, JavaScript, HTML, CSS, Tailwind, dan PHP. Memiliki 
-        kemampuan kerjasama tim, manajemen waktu, inisiatif tinggi,
-        critical thinking, dan problem solving. Tertarik untuk 
-        mengembangkan diri melalui pengalaman magang di industri.</p>
+    <section id="about" class="py-20 bg-white/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16 animate-fade-in-up">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Tentang Saya</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Mahasiswa Sistem Informasi yang passionate dalam bidang teknologi dengan fokus pada pengembangan web, analisis sistem, dan desain UI/UX. Memiliki pengalaman solid dalam mengelola proyek dari konsep hingga implementasi.
+                        </p>
+                        
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Dengan kemampuan teknis yang kuat dan soft skill yang terasah melalui berbagai pengalaman organisasi, saya siap berkontribusi dalam tim pengembangan yang dinamis dan memberikan solusi teknologi yang inovatif.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6 pt-6">
+                            <div class="text-center p-4 bg-white rounded-lg shadow-md">
+                                <div class="text-2xl font-bold text-indigo-600">8+</div>
+                                <div class="text-sm text-gray-600">Projek Selesai</div>
+                            </div>
+                            <div class="text-center p-4 bg-white rounded-lg shadow-md">
+                                <div class="text-2xl font-bold text-indigo-600">3+</div>
+                                <div class="text-sm text-gray-600">Organisasi</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-indigo-100 rounded-lg mr-4">
+                                    <i data-lucide="code" class="w-6 h-6 text-indigo-600"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Development</h3>
+                            </div>
+                            <p class="text-gray-600">Pengembangan aplikasi web dan desktop dengan berbagai teknologi modern</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-purple-100 rounded-lg mr-4">
+                                    <i data-lucide="palette" class="w-6 h-6 text-purple-600"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">UI/UX Design</h3>
+                            </div>
+                            <p class="text-gray-600">Desain antarmuka yang user-friendly dengan pendekatan Design Thinking</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-green-100 rounded-lg mr-4">
+                                    <i data-lucide="settings" class="w-6 h-6 text-green-600"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">System Analysis</h3>
+                            </div>
+                            <p class="text-gray-600">Analisis dan dokumentasi sistem dengan standar industri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4">
-        <a href="projek.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded text-center">
-            Lihat Projek
-        </a>
-        <a href="organisasi.html" class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded text-center">
-            Pengalaman & Organisasi
-        </a>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Keahlian Teknis</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Programming Languages -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i data-lucide="code-2" class="w-6 h-6 mr-3 text-indigo-600"></i>
+                            Programming
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Java</span>
+                                    <span class="text-indigo-600">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-indigo-600 to-blue-600 h-3 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">PHP</span>
+                                    <span class="text-indigo-600">80%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-indigo-600 to-blue-600 h-3 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">JavaScript</span>
+                                    <span class="text-indigo-600">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-indigo-600 to-blue-600 h-3 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">VB.NET</span>
+                                    <span class="text-indigo-600">70%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-indigo-600 to-blue-600 h-3 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Frameworks & Tools -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i data-lucide="layers" class="w-6 h-6 mr-3 text-purple-600"></i>
+                            Frameworks & Tools
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Laravel</span>
+                                    <span class="text-purple-600">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-purple-600 to-pink-600 h-3 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Tailwind CSS</span>
+                                    <span class="text-purple-600">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-purple-600 to-pink-600 h-3 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Flutter</span>
+                                    <span class="text-purple-600">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-purple-600 to-pink-600 h-3 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Figma</span>
+                                    <span class="text-purple-600">80%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-purple-600 to-pink-600 h-3 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Database & Others -->
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i data-lucide="database" class="w-6 h-6 mr-3 text-green-600"></i>
+                            Database & DevOps
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">MySQL</span>
+                                    <span class="text-green-600">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-green-600 to-teal-600 h-3 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Git & GitHub</span>
+                                    <span class="text-green-600">80%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar bg-gradient-to-r from-green-600 to-teal-600 h-3 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i data-lucide="user-check" class="w-6 h-6 mr-3 text-orange-600"></i>
+                            Soft Skills
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-orange-600 mr-3"></i>
+                                <span>Critical Thinking</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-orange-600 mr-3"></i>
+                                <span>Problem Solving</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-orange-600 mr-3"></i>
+                                <span>Team Work</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-orange-600 mr-3"></i>
+                                <span>Time Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container mx-auto px-4 py-16">
-        <h2 class="text-3xl font-semibold mb-4">Kontak</h2>
-        <p>Email: ahnafputra@email.com</p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/ahnaf" class="text-blue-600 hover:underline">linkedin.com/in/ahnaf</a></p>
-        <p>GitHub: <a href="https://github.com/ahnafputra" class="text-blue-600 hover:underline">github.com/ahnafputra</a></p>
+    <section id="contact" class="py-20 bg-white/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Mari Berkolaborasi</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full"></div>
+                    <p class="text-xl text-gray-600 mt-6">Tertarik untuk bekerja sama? Mari berdiskusi!</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-indigo-100 rounded-lg mr-4">
+                                    <i data-lucide="mail" class="w-6 h-6 text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Email</h3>
+                                    <a href="mailto:ahnafputra258@email.com" class="text-indigo-600 hover:underline">ahnafputra258@email.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                                    <i data-lucide="linkedin" class="w-6 h-6 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">LinkedIn</h3>
+                                    <a href="https://linkedin.com/in/ahnafsofian45" class="text-blue-600 hover:underline">linkedin.com/in/ahnafsofian45</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-gray-100 rounded-lg mr-4">
+                                    <i data-lucide="github" class="w-6 h-6 text-gray-700"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">GitHub</h3>
+                                    <a href="https://github.com/ahnafsofian45" class="text-gray-700 hover:underline">github.com/ahnafsofian45</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-4">
-        <p>&copy; 2025 Ahnaf Putra. All rights reserved.</p>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="mailto:ahnafputra@email.com" class="p-3 bg-gray-800 rounded-full hover:bg-indigo-600 transition-colors duration-300">
+                    <i data-lucide="mail" class="w-6 h-6"></i>
+                </a>
+                <a href="https://linkedin.com/in/ahnaf" class="p-3 bg-gray-800 rounded-full hover:bg-blue-600 transition-colors duration-300">
+                    <i data-lucide="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="https://github.com/ahnafputra" class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
+                    <i data-lucide="github" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p class="text-gray-400">&copy; 2025 Ahnaf Sofi'an Eka Putra. All rights reserved.</p>
+            <p class="text-sm text-gray-500 mt-2">Dibuat dengan ❤️ untuk masa depan yang lebih baik</p>
+        </div>
     </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const skillsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-bar');
+                    skillBars.forEach(bar => {
+                        bar.style.width = bar.style.width || '0%';
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            skillsObserver.observe(skillsSection);
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Form submission (placeholder - replace with actual form handler)
+        const contactForm = document.querySelector('#contact form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Terima kasih! Pesan Anda telah dikirim. (Ini hanya demo)');
+        });
+    </script>
 </body>
 </html>
